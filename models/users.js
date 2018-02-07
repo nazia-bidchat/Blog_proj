@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
            freezeTableName: true,
            timestamps: false,
        },
+
 {
   hooks:
   {
@@ -28,6 +29,9 @@ module.exports = (sequelize, DataTypes) => {
   }
 }
      );
+
+
+
 
   users.getName = function(details ,callback){
     //callback(null,true);

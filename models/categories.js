@@ -2,7 +2,7 @@ var models = require('../models');
 
 
 module.exports = function (sequelize, DataTypes) {
-    var categoryy = sequelize.define('category', {
+    var categoryy = sequelize.define('categoryyy', {
         'cat_id': {
             type: DataTypes.INTEGER,
             autoIncrement: true,
@@ -13,6 +13,13 @@ module.exports = function (sequelize, DataTypes) {
         },
         'Description': {
             type: DataTypes.STRING
+        },
+        'User_id':
+        {  type: DataTypes.INTEGER,
+          references: {
+     model: "user",
+     key: "id"
+   }
         }
       },
         // {
@@ -22,10 +29,21 @@ module.exports = function (sequelize, DataTypes) {
            );
 
 
-             categoryy.getCat = function(details ,callback){
+             categoryy.getCat = function(model_ref,details ,callback){
                //callback(null,true);
+              categoryy.belongsTo(model_ref.user, {foreignKey: 'User_id'});
+
              categoryy.findAll({
                    attributes:['Title'],
+
+                                      include:[
+                                        {
+                                          model:model_ref.user,
+                                          required:true,
+                                          attributes:['fname','lastname']
+                                        }
+                                      ]
+
                  }).then(function(result){
                    callback(null,result);
                })
@@ -52,13 +70,14 @@ module.exports = function (sequelize, DataTypes) {
                      });
                  });
              };
-             categoryy.enterUser=function(req,callback)
+             categoryy.enterCat=function(req,callback)
              {
-               users.create(
+               categoryy.create(
                  {
-                   Title:"def",//req.params['fname'],
-                   Description:req.params['Description'],
-                   cat_id:req.params['cat_id'],
+                   Title:req.body.Title,
+                   Description:req.body.Description,
+                   cat_id:req.body.id,
+                   User_id:req.body.u_id,
                  }).then(function(enter)
                  {
                  callback(null,enter);
