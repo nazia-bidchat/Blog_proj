@@ -1,5 +1,7 @@
 'use strict';
 var bcrypt = require('bcrypt');
+var sha1=require('sha1');
+var jwt = require('jsonwebtoken');
 module.exports = (sequelize, DataTypes) => {
   var users = sequelize.define('user', {
     'id': {
@@ -71,6 +73,7 @@ users.enterUser=function(req,callback)
     {
       fname:req.body.fname,//"aaaa",
       lastname:req.body.lastname,//"defgh",
+      //password:sha1(req.body.password),
 
       password:bcrypt.hashSync(req.body.password,8),
       id:req.params['id'],
@@ -87,6 +90,55 @@ users.enterUser=function(req,callback)
       });
 
 };
+
+
+
+users.update1=function(req,callback)
+{
+
+    users.update(
+      {
+        fname:req.body.fname,
+        lastname:req.body.lastname,
+        password:bcrypt.hashSync(req.body.password,8)
+      },
+      {
+        where:
+        {id:req.params.id}
+      }
+    ).then(function(enter)
+    {
+    callback(null,enter);
+  })  .catch(function(error){
+      console.log("error",error);
+      return callback({
+          message:error.message
+        });
+      });
+
+};
+
+
+users.login1=function(req,callback)
+{
+  users.findOne(
+    { where:
+      {fname: req.body.fname  }}).then(function(req,user)
+  {
+    var passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
+       if(passwordIsValid)
+       {
+         var token = jwt.sign({ id: user._id }, config.secret, {
+  expiresIn: 86400 // expires in 24 hours
+});
+}callback(null,user);}).catch(function(error){
+  return callback({message:error.message});
+});
+};
+
+
+
+
 
   console.log("users : ",users);
 

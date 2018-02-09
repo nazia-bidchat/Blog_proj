@@ -9,6 +9,8 @@ var UserController = require('../controllers/usercontroller');
 router.get('/user/:id', UserController.getName);
 router.get('/user',UserController.getAll);
 router.post('/user',UserController.enterUser);
+router.put('/user/:id',UserController.update1);
+router.post('/login',UserController.login1);
 router.post('/caaat',  function(req, res)
 {
   console.log(req);
