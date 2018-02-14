@@ -14,14 +14,15 @@ module.exports = function (sequelize, DataTypes) {
     'Description': {
       type: DataTypes.STRING
     },
-    'User_id':
-    {  type: DataTypes.INTEGER,
-      references: {
-        model: "user",
-        key: "id"
-      }
+    // ,
+    // 'User_id':
+    // {  type: DataTypes.INTEGER,
+    //   references: {
+    //     model: "user",
+    //     key: "id"
+    //   }
     }
-  },
+
 
 );
 
@@ -56,7 +57,7 @@ categoryy.getCat = function(model_ref,details ,callback){
 categoryy.getAllCat=function(callback)
 {
   categoryy.findAll({
-    attributes:['Description'],
+    attributes:['Title'],
   }).then(function(result){
     callback(null,result);
   })
@@ -74,7 +75,7 @@ categoryy.enterCat=function(req,callback)
       Title:req.body.Title,
       Description:req.body.Description,
       cat_id:req.body.id,
-      User_id:req.body.u_id,
+      // User_id:req.body.u_id,
     }).then(function(enter)
     {
       callback(null,enter);

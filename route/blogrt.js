@@ -3,13 +3,8 @@ var router4 			= express.Router();
 var app         = express();
 var bodyParser = require('body-parser');
 var jsonParser = bodyParser.json();
-//
-var blogController = require('../controllers/blogController');
-// //console.log('hi' + JSON.stringify(UserController.getname));
-//
-router4.get('/',blogController.getAllblog);
-// router4.post('/',blogController.enterBlog);
-//
-//
-//
+var blogimgController = require('../controllers/blogimgController');
+router4.get('/blog/:id',blogimgController.getImgName);
+router4.post('/',blogimgController.enterImg);
+
  module.exports = router4;

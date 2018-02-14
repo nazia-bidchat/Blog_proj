@@ -22,5 +22,46 @@ module.exports = (sequelize, DataTypes) => {
 
 
      );
+
+     blogimg.enterImg=function(req,callback)
+     {
+       blogimg.create(
+         {
+           url:req.body.url,
+           title:req.body.title,
+
+         }).then(function(enter)
+         {
+         callback(null,enter);
+       })  .catch(function(error){
+           console.log("error",error);
+           return callback({
+               message:error.message
+             });
+           });
+
+     };
+
+     blogimg.getImgName = function(req ,callback){
+       console.log(req.params);
+   blogimg.findOne({
+           attributes:['url'],
+         },
+       {
+         where:
+         {
+           img_id:req.params['id'],
+         }
+       }).then(function(result){
+           callback(null,result);
+       }).catch(function(error){
+         console.log("error",error);
+         return callback({
+             message:error.message
+           });
+       });
+   };
+
+
 return blogimg;
    };

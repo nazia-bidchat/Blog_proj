@@ -23,21 +23,21 @@ module.exports = (sequelize, DataTypes) => {
  model: "user",
  key: "id"
 }
-}
-//   content:{
-//     type: DataTypes.STRING },
-//     image_id:{
-//       type: DataTypes.STRING,
-//       references: {
-//  model: "blog_image",
-//  key: "img_id"
-// }
-// }},
 },
-     // {
-     //       freezeTableName: true,
-     //       timestamps: false,
-     //   },
+  content:{
+    type: DataTypes.STRING },
+    image_id:{
+      type: DataTypes.INTEGER,
+      references: {
+ model: "blog_image",
+ key: "img_id"
+}
+}},
+
+     {
+           freezeTableName: true,
+           timestamps: true,
+       },
 
 
      );
@@ -108,14 +108,13 @@ module.exports = (sequelize, DataTypes) => {
      {
        blog.create(
          {
-           id:req.body.id,//"aaaa",
-           title:req.body.title,//"defgh",
+           id:req.body.id,
+           title:req.body.title,
            category_id:req.body.category_id,
            user_id:req.body.user_id,
            content:req.body.content,
            image_id:req.body.image_id,
-           //console.log(password);
-         //  console.log(fname);
+
          }).then(function(enter)
          {
          callback(null,enter);

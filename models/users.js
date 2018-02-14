@@ -18,7 +18,10 @@ module.exports = (sequelize, DataTypes) => {
     lastname:{
       type: DataTypes.STRING },
     password:{
-      type: DataTypes.STRING}
+      type: DataTypes.STRING},
+      Token:{
+        type:DataTypes.STRING
+      }
   }, {
            freezeTableName: true,
            timestamps: false,
@@ -36,10 +39,8 @@ module.exports = (sequelize, DataTypes) => {
      );
 
 
-
-
   users.getName = function(req ,callback){
-    //callback(null,true);
+
 users.findOne({
         attributes:['fname'],
       },
@@ -80,14 +81,13 @@ users.enterUser=function(req,callback)
 {
   users.create(
     {
-      fname:req.body.fname,//"aaaa",
-      lastname:req.body.lastname,//"defgh",
-      //password:sha1(req.body.password),
+      fname:req.body.fname,
+      lastname:req.body.lastname,
+
 
       password:bcrypt.hashSync(req.body.password,8),
       id:req.params['id'],
-      //console.log(password);
-    //  console.log(fname);
+
     }).then(function(enter)
     {
     callback(null,enter);
@@ -104,14 +104,13 @@ users.enterUser1=function(req,res)
 {
   users.create(
     {
-      fname:req.body.fname,//"aaaa",
-      lastname:req.body.lastname,//"defgh",
-      //password:sha1(req.body.password),
+      fname:req.body.fname,
+      lastname:req.body.lastname,
+
 
       password:bcrypt.hashSync(req.body.password,8),
       id:req.params['id'],
-      //console.log(password);
-    //  console.log(fname);
+
   }).then(function(user)
     {
       var token = jwt.sign({ id: user._id }, config.secret, {
@@ -126,12 +125,6 @@ users.enterUser1=function(req,res)
       });
 
 };
-
-
-
-
-
-
 
 
 
@@ -162,74 +155,60 @@ users.update1=function(req,callback)
 
 
 users.login1=function(req,res)
-{
-// //   users.findOne(
-// //     { where:
-// //       {fname: req.body.fname  }}).then(function(req,user)
-// //   {
-// //     var passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
-// //        if(passwordIsValid)
-// //        {
-// //          var token = jwt.sign({ id: user._id }, config.secret, {
-// //   expiresIn: 86400 // expires in 24 hours
-// // });
-// // }callback(null,user);}).catch(function(error){
-// //   return callback({message:error.message});
-// // });
-// // };
-//
-//
-//
+{  console.log(req.body);
+
 users.findOne(
   {
+
     where:
   { fname: req.body.fname }}).then( function ( user) {
-  // if (err) return res.status(500).send(user);
-  // console.log("im in err");
-  // if (!user) return  res.status(404).send('No user found.');
-  // console.log("im in user");
-  // check if the password is valid
-    console.log(user.password);
+
   var pass =  bcrypt.hashSync(req.body.password,8);
   var passwordIsValid = bcrypt.compare(pass, user.password);
   if (!passwordIsValid)
-  // console.log(req.body.password);
-  //   console.log(passwordIsValid);
+
 
   return res.status(401).send({ auth: false, token: null });
 
   console.log("im in pass");
 
+var u_id=user.id;
 
-  // if user is found and password is valid
-  // create a token
-  var token = jwt.sign({ id: user._id }, config.secret, {
+  var token = jwt.sign({ id: user.id }, config.secret, {
     expiresIn: 86400 // expires in 24 hours
   });
-return   res.status(200).send({ auth: true, token: token });
+
+  var decode=jwt.decode(token,config.secret);
+  console.log(decode);
+  users.update(
+    {
+      Token:token
+    },
+    {
+      where:
+      {id:u_id}
+    }).then(function(enter)
+    {
+    console.log('result');
+  })  .catch(function(error){
+      console.log("error",error);
+
+      });
+return   res.status(200).send({ success: true, token: token });
  // return the information including token as JSON
 
 }).catch(function(error){
     console.log("error",error);
     return res.status(500).send("user");
-    // return callback({
-    //     message:error.message
-    //   });
+
     });
 
 
 }
 
 
-// users.verify(VerifyToken,function(req,res,next)
-// {
-//   users.findById(req.userId, { password: 0 }, function (err, user) {
-//    if (err) return res.status(500).send("There was a problem finding the user.");
-//    if (!user) return res.status(404).send("No user found.");
-//    res.status(200).send(user);
-// });
-// });
-  console.log("users : ",users);
+
+
 
   return users;
 };
