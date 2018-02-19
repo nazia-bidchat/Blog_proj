@@ -54,6 +54,7 @@ var  password = document.getElementById('pwd').value;
     data: JSON.stringify({fname:user,password:password}),
     success: function(response){
       localStorage.setItem('token', JSON.stringify(response.token));
+      localStorage.setItem('id', JSON.stringify(response.id));
       window.location="test2.html";
 //
 //       console.log('true');

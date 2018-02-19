@@ -2,7 +2,7 @@ var models = require('../models');
 
 
 module.exports = function (sequelize, DataTypes) {
-  var categoryy = sequelize.define('categoryyy', {
+  var categories = sequelize.define('category', {
     'cat_id': {
       type: DataTypes.INTEGER,
       autoIncrement: true,
@@ -14,34 +14,19 @@ module.exports = function (sequelize, DataTypes) {
     'Description': {
       type: DataTypes.STRING
     },
-    // ,
-    // 'User_id':
-    // {  type: DataTypes.INTEGER,
-    //   references: {
-    //     model: "user",
-    //     key: "id"
-    //   }
-    }
 
+  },
+    {
+             freezeTableName: true,
+             timestamps: true,
+         },
 
 );
 
-
-categoryy.getCat = function(model_ref,details ,callback){
-  //callback(null,true);
-  categoryy.belongsTo(model_ref.user, {foreignKey: 'User_id'});
-
-  categoryy.findAll({
-    attributes:['Title'],
-
-    include:[
-      {
-        model:model_ref.user,
-        required:true,
-        attributes:['fname','lastname']
-      }
-    ]
-
+categories.GetAllCategory=function(callback)
+{
+  categories.findAll({
+    attributes:['cat_id','Title'],
   }).then(function(result){
     callback(null,result);
   })
@@ -52,30 +37,13 @@ categoryy.getCat = function(model_ref,details ,callback){
     });
   });
 };
-
-
-categoryy.getAllCat=function(callback)
+categories.EnterCat=function(req,callback)
 {
-  categoryy.findAll({
-    attributes:['Title'],
-  }).then(function(result){
-    callback(null,result);
-  })
-  .catch(function(error){
-    console.log("error",error);
-    return callback({
-      message:error.message
-    });
-  });
-};
-categoryy.enterCat=function(req,callback)
-{
-  categoryy.create(
+  categories.create(
     {
       Title:req.body.Title,
       Description:req.body.Description,
       cat_id:req.body.id,
-      // User_id:req.body.u_id,
     }).then(function(enter)
     {
       callback(null,enter);
@@ -88,6 +56,6 @@ categoryy.enterCat=function(req,callback)
 
   };
 
-  console.log("im in category table");
-  return categoryy;
+
+  return categories;
 };

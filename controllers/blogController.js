@@ -5,32 +5,75 @@ var blog=function(){
 };
 
 
-blog.getAllblog = function(req,res)
+blog.GetSinglePost = function(req,res)
 {
-  console.log('In getname 1'+req.params.id);
+
   var id=req.params.id;//return res.status(200).send("success");
-  models.blogg.getAllblog(models,id,function(error,response)
+  models.blogs.GetSinglePost(models,id,function(error,response)
   {
-    console.log('In getname 2'+req.params.id);
+
     if(error)
     {
-      return res.status(409).send(response);
+      return res.status(404).send(response);
     }
     return res.status(200).send(response);
   });
 };
 
 
-blog.getAllblog1 = function(req,res)
+blog.GetAllblog = function(req,res)
 {
-  console.log('In getname 1'+req.params.id);
-  var id=req.params.id;//return res.status(200).send("success");
-  models.blogg.getAllblog1(models,id,function(error,response)
+
+  models.blogs.GetAllblog(models,req,function(error,response)
   {
-    console.log('In getname 2'+req.params.id);
+
     if(error)
     {
-      return res.status(409).send(response);
+      return res.status(404).send(response);
+    }
+    return res.status(200).send(response);
+  });
+};
+
+blog.GetPostImg = function(req,res)
+{
+
+  var id=req.params.id;
+  models.blogs.GetPostImg(models,id,function(error,response)
+  {
+
+    if(error)
+    {
+      return res.status(404).send(response);
+    }
+    return res.status(200).send(response);
+  });
+};
+
+blog.GetSingleImage = function(req,res)
+{
+
+  var id=req.params.id;
+  models.blogs.GetSingleImage(models,id,function(error,response)
+  {
+
+    if(error)
+    {
+      return res.status(404).send(response);
+    }
+    return res.status(200).send(response);
+  });
+};
+blog.DeleteSingleImage = function(req,res)
+{
+
+  var id=req.params.id;
+  models.blogs.GetSingleImage(models,id,function(error,response)
+  {
+
+    if(error)
+    {
+      return res.status(500).send(response);
     }
     return res.status(200).send(response);
   });
@@ -38,15 +81,15 @@ blog.getAllblog1 = function(req,res)
 
 
 
-blog.enterBlog=function(req,res)
+blog.EnterPost=function(req,res)
 {
-  console.log('In getname 5');
-  console.log(req.body.query);
-  models.blogg.enterblog(req,function(err,response)
-  {  console.log('In getname 6');
+
+
+  models.blogs.EnterPost(req,function(err,response)
+  {
   if(err)
   {
-    return res.status(409).send(response);
+    return res.status(500).send(response);
 
   }
   return res.status(200).send(response);
