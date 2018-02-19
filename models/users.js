@@ -44,7 +44,7 @@ module.exports = (sequelize, DataTypes) => {
         callback(null,result);
       })
       .catch(function(error){
-        console.log("error",error);
+
         return callback({
           message:error.message
         });
@@ -60,7 +60,7 @@ module.exports = (sequelize, DataTypes) => {
         callback(null,result);
       })
       .catch(function(error){
-        console.log("error",error);
+
         return callback({
           message:error.message
         });
@@ -74,8 +74,6 @@ module.exports = (sequelize, DataTypes) => {
         {
           fname:req.body.fname,
           lastname:req.body.lastname,
-
-
           password:bcrypt.hashSync(req.body.password,8),
           id:req.params['id'],
 
@@ -83,7 +81,7 @@ module.exports = (sequelize, DataTypes) => {
         {
           callback(null,enter);
         })  .catch(function(error){
-          console.log("error",error);
+
           return callback({
             message:error.message
           });
@@ -91,11 +89,8 @@ module.exports = (sequelize, DataTypes) => {
 
       };
 
-
-
       users.updateUser=function(req,callback)
       {
-
         users.update(
           {
             fname:req.body.fname,
@@ -124,27 +119,18 @@ module.exports = (sequelize, DataTypes) => {
 
         users.findOne(
           {
-
             where:
             { fname: req.body.fname }}).then( function ( user) {
 
               var pass =  bcrypt.hashSync(req.body.password,8);
               var passwordIsValid = bcrypt.compare(pass, user.password);
               if (!passwordIsValid)
-
-
               return res.status(401).send({ auth: false, token: null });
 
-
-
               var u_id=user.id;
-
               var token = jwt.sign({ id: user.id }, config.secret, {
                 expiresIn: 86400 // expires in 24 hours
               });
-
-
-
               users.update(
                 {
                   Token:token
@@ -154,26 +140,19 @@ module.exports = (sequelize, DataTypes) => {
                   {id:u_id}
                 }).then(function(enter)
                 {
+                  console.log(enter);
+                }).catch(function(error){
 
-                })  .catch(function(error){
-                  console.log("error",error);
+                  console.log(error);
 
                 });
                 return   res.status(200).send({ success: true, token: token, id: user.id });
-
-
               }).catch(function(error){
-                console.log("error",error);
+
                 return res.status(500).send("unable to update into database");
 
               });
-
-
             }
-
-
-
-
 
             return users;
           };

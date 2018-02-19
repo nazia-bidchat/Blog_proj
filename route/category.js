@@ -5,7 +5,6 @@ var models = require('../models');
 var auth = require('../controllers/Auth');
 var categoryController = require('../controllers/categoryController');
 
-
 router.get('/',categoryController.getAllcategory);
 router.post('/',verifyToken,auth,categoryController.enterCat);
 

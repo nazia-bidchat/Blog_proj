@@ -32,20 +32,16 @@ module.exports = (sequelize, DataTypes) => {
         freezeTableName: true,
         timestamps: true,
       },
+  );
 
 
-    );
-
-
-    blog.getSinglepost = function(model_ref,id ,callback){
-
+    blog.getSinglepost = function(model_ref,id ,callback)
+    {
       blog.belongsTo(model_ref.user, {foreignKey: 'User_id'});
       blog.belongsTo(model_ref.category, {foreignKey: 'category_id'});
       blog.hasMany(model_ref.blogimages, {foreignKey: 'postId'});
       blog.findOne({
         attributes:['title','blog_id','content'],
-
-
         include: [
           {
             model: model_ref.user,
@@ -77,15 +73,13 @@ module.exports = (sequelize, DataTypes) => {
       });
     };
 
-    blog.getPostimages = function(model_ref,id ,callback){
-
+    blog.getPostimages = function(model_ref,id ,callback)
+    {
       blog.belongsTo(model_ref.user, {foreignKey: 'User_id'});
       blog.belongsTo(model_ref.category, {foreignKey: 'category_id'});
       blog.hasMany(model_ref.blogimages, {foreignKey: 'postId'});
       blog.findAll({
         attributes:['title','blog_id','content'],
-
-
         include: [
 
           {
@@ -101,15 +95,15 @@ module.exports = (sequelize, DataTypes) => {
           } ).then(function(result){
         callback(null,result);
       }).catch(function(error){
-        console.log("error",error);
+
         return callback({
           message:error.message
         });
       });
     };
 
-    blog.getSingleimage = function(model_ref,id ,callback){
-
+    blog.getSingleimage = function(model_ref,id ,callback)
+    {
       blog.belongsTo(model_ref.user, {foreignKey: 'User_id'});
       blog.belongsTo(model_ref.category, {foreignKey: 'category_id'});
       blog.hasMany(model_ref.blogimages, {foreignKey: 'postId'});
@@ -128,7 +122,7 @@ module.exports = (sequelize, DataTypes) => {
           } ).then(function(result){
         callback(null,result);
       }).catch(function(error){
-        console.log("error",error);
+
         return callback({
           message:error.message
         });
@@ -151,18 +145,12 @@ module.exports = (sequelize, DataTypes) => {
             {
               id:parseInt(id),
             }
-
           }
-
         ],
-
-
-
-
       } ).then(function(result){
         callback(null,result);
       }).catch(function(error){
-        console.log("error",error);
+
         return callback({
           message:error.message
         });
@@ -178,27 +166,24 @@ module.exports = (sequelize, DataTypes) => {
           category_id:req.body.category_id,
           User_id:req.body.User_id,
           content:req.body.content,
-
-
         }).then(function(enter)
         {
           callback(null,enter);
         })  .catch(function(error){
-          console.log("error",error);
+
           return callback({
             message:error.message
           });
         });
-
       };
 
       blog.getAllblog=function(model_ref,req,callback)
       {
-        console.log(req.query);
+
         blog.belongsTo(model_ref.user, {foreignKey: 'User_id'});
         blog.belongsTo(model_ref.category, {foreignKey: 'category_id'});
         blog.hasMany(model_ref.blogimages, {foreignKey: 'postId'});
-        var limit =parseInt( req.query.limit);   // number of records per page
+        var limit =parseInt( req.query.limit);
         var offset=parseInt( req.query.offset);
         blog.findAll(
           {
@@ -226,13 +211,11 @@ module.exports = (sequelize, DataTypes) => {
               callback(null,result);
             })
             .catch(function(error){
-              console.log("error",error);
+
               return callback({
                 message:error.message
               });
             });
           };
-
-
           return blog;
         };

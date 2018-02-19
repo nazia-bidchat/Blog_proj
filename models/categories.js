@@ -31,7 +31,7 @@ categories.getAllcategory=function(callback)
     callback(null,result);
   })
   .catch(function(error){
-    console.log("error",error);
+
     return callback({
       message:error.message
     });
@@ -48,7 +48,7 @@ categories.enterCat=function(req,callback)
     {
       callback(null,enter);
     })  .catch(function(error){
-      console.log("error",error);
+
       return callback({
         message:error.message
       });
