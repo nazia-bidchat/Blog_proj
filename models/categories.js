@@ -23,7 +23,7 @@ module.exports = function (sequelize, DataTypes) {
 
 );
 
-categories.GetAllCategory=function(callback)
+categories.getAllcategory=function(callback)
 {
   categories.findAll({
     attributes:['cat_id','Title'],
@@ -37,7 +37,7 @@ categories.GetAllCategory=function(callback)
     });
   });
 };
-categories.EnterCat=function(req,callback)
+categories.enterCat=function(req,callback)
 {
   categories.create(
     {

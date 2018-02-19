@@ -1,6 +1,6 @@
 var models = require('../models');
 module.exports = (sequelize, DataTypes) => {
-  var blogimage = sequelize.define('blogimages', {
+  var blogImage = sequelize.define('blogimages', {
     'id': {
       type: DataTypes.INTEGER,
       autoIncrement: true,
@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       references: {
         model: "blogs",
-        key: "blog_id"
+        key: "id"
       }
     }
   },
@@ -26,5 +26,5 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: false,
   },);
 
-  return blogimage;
+  return blogImage;
 };

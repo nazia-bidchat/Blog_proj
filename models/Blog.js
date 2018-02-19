@@ -37,7 +37,7 @@ module.exports = (sequelize, DataTypes) => {
     );
 
 
-    blog.GetSinglePost = function(model_ref,id ,callback){
+    blog.getSinglepost = function(model_ref,id ,callback){
 
       blog.belongsTo(model_ref.user, {foreignKey: 'User_id'});
       blog.belongsTo(model_ref.category, {foreignKey: 'category_id'});
@@ -77,7 +77,7 @@ module.exports = (sequelize, DataTypes) => {
       });
     };
 
-    blog.GetPostImg = function(model_ref,id ,callback){
+    blog.getPostimages = function(model_ref,id ,callback){
 
       blog.belongsTo(model_ref.user, {foreignKey: 'User_id'});
       blog.belongsTo(model_ref.category, {foreignKey: 'category_id'});
@@ -108,7 +108,7 @@ module.exports = (sequelize, DataTypes) => {
       });
     };
 
-    blog.GetSingleImage = function(model_ref,id ,callback){
+    blog.getSingleimage = function(model_ref,id ,callback){
 
       blog.belongsTo(model_ref.user, {foreignKey: 'User_id'});
       blog.belongsTo(model_ref.category, {foreignKey: 'category_id'});
@@ -135,7 +135,7 @@ module.exports = (sequelize, DataTypes) => {
       });
     };
 
-    blog.DeleteSingleImage = function(model_ref,id ,callback){
+    blog.deleteSingleimage = function(model_ref,id ,callback){
 
       blog.belongsTo(model_ref.user, {foreignKey: 'User_id'});
       blog.belongsTo(model_ref.category, {foreignKey: 'category_id'});
@@ -169,7 +169,7 @@ module.exports = (sequelize, DataTypes) => {
       });
     };
 
-    blog.EnterPost=function(req,callback)
+    blog.enterPost=function(req,callback)
     {
       blog.create(
         {
@@ -178,7 +178,7 @@ module.exports = (sequelize, DataTypes) => {
           category_id:req.body.category_id,
           User_id:req.body.User_id,
           content:req.body.content,
-          // image_id:req.body.image_id,
+
 
         }).then(function(enter)
         {
@@ -192,7 +192,7 @@ module.exports = (sequelize, DataTypes) => {
 
       };
 
-      blog.GetAllblog=function(model_ref,req,callback)
+      blog.getAllblog=function(model_ref,req,callback)
       {
         console.log(req.query);
         blog.belongsTo(model_ref.user, {foreignKey: 'User_id'});

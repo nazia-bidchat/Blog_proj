@@ -1,17 +1,14 @@
 var express 		= require('express');
 var router			= express.Router();
-var app         = express();
-var bodyParser = require('body-parser');
-var jsonParser = bodyParser.json();
-var blogController = require('../controllers/BlogController');
-var VerifyToken = require('../controllers/VerifyToken');
+var blogController = require('../controllers/blogController');
+var verifyToken = require('../controllers/VerifyToken');
 var models = require('../models');
 var auth = require('../controllers/Auth');
-router.get('/?',blogController.GetAllblog);
-router.get('/:id',blogController.GetSinglePost);
-router.get('/:id/images',blogController.GetPostImg);
-router.post('/',VerifyToken,auth,blogController.EnterPost);
-router.get('/:id/images/:id',VerifyToken,auth,blogController.GetSingleImage);
-router.delete('/:id/images/:id',VerifyToken,auth,blogController.DeleteSingleImage);
+router.get('/?',blogController.getAllblog);
+router.get('/:id',blogController.getSinglepost);
+router.get('/:id/images',blogController.getPostimages);
+router.post('/',verifyToken,auth,blogController.enterPost);
+router.get('/:id/images/:id',blogController.getSingleimage);
+router.delete('/:id/images/:id',verifyToken,auth,blogController.deleteSingleimage);
 
 module.exports = router;

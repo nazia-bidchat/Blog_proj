@@ -1,9 +1,8 @@
 'use strict';
 var bcrypt = require('bcrypt');
-var sha1=require('sha1');
 var jwt = require('jsonwebtoken');
 var config = require('../config/config1');
-var VerifyToken = require('../controllers/VerifyToken');
+var verifyToken = require('../controllers/verifyToken');
 
 module.exports = (sequelize, DataTypes) => {
   var users = sequelize.define('user', {
@@ -27,19 +26,11 @@ module.exports = (sequelize, DataTypes) => {
         timestamps: false,
       },
 
-      {
-        hooks:
-        {
-          afterCreate:function(user)
-          {
-            user.password= bcrypt.hashSync(user.password,8);
-          }
-        }
-      }
+
     );
 
 
-    users.GetUserName = function(req ,callback){
+    users.getUsername = function(req ,callback){
 
       users.findOne({
         attributes:['fname'],
@@ -61,7 +52,7 @@ module.exports = (sequelize, DataTypes) => {
     };
 
 
-    users.GetAllUser=function(callback)
+    users.getAlluser=function(callback)
     {
       users.findAll({
         attributes:['lastname'],
@@ -77,7 +68,7 @@ module.exports = (sequelize, DataTypes) => {
     };
 
 
-    users.EnterUser=function(req,callback)
+    users.enterUser=function(req,callback)
     {
       users.create(
         {
@@ -102,7 +93,7 @@ module.exports = (sequelize, DataTypes) => {
 
 
 
-      users.UpdateUser=function(req,callback)
+      users.updateUser=function(req,callback)
       {
 
         users.update(
@@ -128,7 +119,7 @@ module.exports = (sequelize, DataTypes) => {
       };
 
 
-      users.Login=function(req,res)
+      users.login=function(req,res)
       {
 
         users.findOne(

@@ -2,10 +2,10 @@ var models = require('../models');
 var categories=function(){
 
 };
-categories.GetAllCategory=function(req,res)
+categories.getAllcategory=function(req,res)
 {
 
-  models.category.GetAllCategory (function(err,response)
+  models.category.getAllcategory (function(err,response)
   {
     if(err)
     {
@@ -17,9 +17,9 @@ categories.GetAllCategory=function(req,res)
 };
 
 
-categories.EnterCat=function(req,res)
+categories.enterCat=function(req,res)
 {
-  models.category.EnterCat(req,function(err,response)
+  models.category.enterCat(req,function(err,response)
   {
   if(err)
   {
