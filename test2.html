@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+  .modal-header, .close {
+      background-color: #5cb85c;
+      color:white !important;
+      text-align: center;
+      font-size: 30px;
+  }
+  .modal-footer {
+      background-color: #f9f9f9;
+  }
+
+
+  li:active {
+    background-color:blue;
+}
+    /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+    .row.content {height: 1500px}
+
+    /* Set gray background color and 100% height */
+    .sidenav {
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height: auto;}
+    }
+
+    .choose_file{
+      position:relative;
+      display:inline-block;
+      border-radius:8px;
+      border:#ebebeb solid 1px;
+      width:250px;
+      padding: 4px 6px 4px 8px;
+      font: normal 14px Myriad Pro, Verdana, Geneva, sans-serif;
+      color: #7f7f7f;
+      margin-top: 2px;
+      background:white
+  }
+  .choose_file input[type="file"]{
+      -webkit-appearance:none;
+      position:absolute;
+      top:0; left:0;
+      opacity:0;
+  }
+  </style>
+</head>
+<body>
+
+<div class="container-fluid">
+  <div class="row content">
+    <div class="col-sm-3 sidenav">
+      <h4>Admin Dashboard</h4>
+      <ul class="nav nav-pills nav-stacked">
+        <li class="active"><a href="#section1">Home</a></li>
+        <li>  <button  class="" onclick="window.location='pag.html'">Submit</button></li>
+        <li><a href="#section2">Friends</a></li>
+        <li><a href="#section3">Family</a></li>
+        <li>  <button type="submit" class="btn btn-success" onclick="dataa()">Submit</button></li>
+        <li><a href="#myModal2"  id="myBtn2">Photos</a></li>
+            <li><a href="#myModal" id="myBtn">Add user</a></li>
+             <!--button type="button" class="btn btn-default btn-lg" id="myBtn">Login</button-->
+<li><a href="#myModal1" id="myBtn1">Add Post</a></li>
+
+
+
+      </ul><br>
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search Blog..">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button">
+            <span class="glyphicon glyphicon-search"></span>
+          </button>
+        </span>
+      </div>
+    </div>
+
+    <div class="col-sm-9" id="div1">
+      <h4><small>RECENT POSTS</small></h4>
+      <hr>
+      <h2 id="head1"> </h2>
+      <h5 id="head2"><span class="glyphicon glyphicon-time"></span> Post by Jane Dane, Sep 27, 2015.</h5>
+      <h5 ><span class="label label-danger">Food</span> <span class="label label-primary">Ipsum</span></h5><br>
+      <p id="para1">Food is my passion. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      <br><br>
+</div>
+<div class="col-sm-9">
+      <h4><small>RECENT POSTS</small></h4>
+      <hr>
+      <h2>Officially Blogging</h2>
+      <h5><span class="glyphicon glyphicon-time"></span> Post by John Doe, Sep 24, 2015.</h5>
+      <h5><span class="label label-success">Lorem</span></h5><br>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      <hr>
+
+      <h4>Leave a Comment:</h4>
+      <form role="form">
+        <div class="form-group">
+          <textarea class="form-control" rows="3" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-success">Submit</button>
+      </form>
+      <br><br>
+
+      <p><span class="badge">2</span> Comments:</p><br>
+
+      <div class="row">
+        <div class="col-sm-2 text-center">
+          <img src="bandmember.jpg" class="img-circle" height="65" width="65" alt="Avatar">
+        </div>
+        <div class="col-sm-10">
+          <h4>Anja <small>Sep 29, 2015, 9:12 PM</small></h4>
+          <p>Keep up the GREAT work! I am cheering for you!! Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          <br>
+        </div>
+        <div class="col-sm-2 text-center">
+          <img src="bird.jpg" class="img-circle" height="65" width="65" alt="Avatar">
+        </div>
+        <div class="col-sm-10">
+          <h4>John Row <small>Sep 25, 2015, 8:25 PM</small></h4>
+          <p>I am so happy for you man! Finally. I am looking forward to read about your trendy life. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          <br>
+          <p><span class="badge">1</span> Comment:</p><br>
+          <div class="row">
+            <div class="col-sm-2 text-center">
+              <img src="bird.jpg" class="img-circle" height="65" width="65" alt="Avatar">
+            </div>
+            <div class="col-xs-10">
+              <h4>Nested Bro <small>Sep 25, 2015, 8:28 PM</small></h4>
+              <p>Me too! WOW!</p>
+              <br>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header" style="padding:35px 50px;">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4><span class="glyphicon glyphicon-lock"></span> Register</h4>
+      </div>
+      <div class="modal-body" style="padding:40px 50px;">
+        <form role="form" action="/enter" method='POST'>
+          <div class="form-group">
+            <label for="usrname"><span class="glyphicon glyphicon-user"></span> Username</label>
+            <input type="text" class="form-control" id="usrname" name="usrname" placeholder="Enter firsname" value="">
+          </div>
+          <div class="form-group">
+            <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
+            <input type="text" class="form-control" id="psw" name="psw" placeholder="Enter password" value="">
+          </div>
+          <div class="form-group">
+            <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Lastname</label>
+            <input type="text" class="form-control" id="last" name="last" placeholder="Enter lastname" value="">
+          </div>
+          <div class="checkbox">
+            <label><input type="checkbox" value="" checked>Remember me</label>
+          </div>
+            <button type="button" class="btn btn-success btn-block" onclick="register()" ><span class="glyphicon glyphicon-off"></span>Register</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+        <p>Not a member? <a href="#">Sign Up</a></p>
+        <p>Forgot <a href="#">Password?</a></p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+$(document).ready(function(){
+  $("#myBtn").click(function(){
+      $("#myModal").modal();
+  });
+});
+</script>
+
+
+
+
+
+
+  <div class="modal fade" id="myModal1" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" style="padding:35px 50px;">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4><span class="glyphicon glyphicon-lock"></span> Add New</h4>
+        </div>
+        <div class="modal-body" style="padding:40px 50px;">
+
+
+  <form>
+
+      <div class="input-group">
+        <span class="input-group-addon">Title</span>
+        <input  type="text" class="form-control" name="Title" placeholder="Title" id="title1" value="">
+      </div>
+      <br>
+      <div class="input-group">
+        <span class="input-group-addon">Text</span>
+        <!--input id="msg" type="text" class="form-control" name="msg" placeholder="Additional Info"-->
+        <textarea class="form-control" rows="5" id="comment" value=""></textarea>
+      </div>
+        <br>
+      <div class="form-group">
+        <label for="sel1">Select Category</label>
+        <select class="form-control" id="sel1">
+          <option selected="selected" id="optid2">select</option>
+          <!-- <option>2</option>
+          <option>3</option>
+          <option>4</option> -->
+        </select>
+        </div>
+        <br>
+        <div class="input-group">
+              <span class="input-group-addon">Upload Image</span>
+             <!-- <input name="Select File" id="file2" class="form-control" value="" type="file" /> -->
+             <select class="form-control" id="sel2">
+               <option selected="selected" id="optid1">Select</option>
+
+             </select>
+
+         </div>
+         <br>
+         <br>
+          <!--button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span>Submit</button-->
+        <button type="submit" class="btn btn-success btn-block" onclick="postt()"><!--span class="glyphicon glyphicon-off"></span-->Post</button>
+
+    </form>
+
+  </div>
+  </div>
+  </div>
+  </div>
+
+
+    <div class="modal fade" id="myModal2" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header" style="padding:35px 50px;">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4><span class="glyphicon glyphicon-lock"></span> Upload Photos</h4>
+          </div>
+          <div class="modal-body" style="padding:40px 50px;">
+
+
+    <form>
+
+        <div class="input-group">
+          <span class="input-group-addon">Name</span>
+          <input  type="text" class="form-control" id="name1" name="name" placeholder="Name" value="">
+        </div>
+
+        <div class="form-group">
+
+          </div>
+
+          <div class="input-group">
+                <span class="input-group-addon">Upload Image</span>
+               <input name="Select File" id="file1" value="" class="form-control" type="file" />
+           </div>
+           <br>
+           <br>
+            <!--button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span>Submit</button-->
+          <button type="Upload" class="btn btn-success btn-block" onclick="uploadimg()"><!--span class="glyphicon glyphicon-off"></span-->Upload</button>
+
+      </form>
+
+    </div>
+    </div>
+    </div>
+    </div>
+
+
+
+
+
+  <script>
+  $(document).ready(function(){
+    $("#myBtn1").click(function(){
+        $("#myModal1").modal();
+    });
+  });
+
+  </script>
+
+  <script>
+  $(document).ready(function(){
+    $("#myBtn2").click(function(){
+        $("#myModal2").modal();
+    });
+  });
+
+  </script>
+
+
+
+
+
+  <script type="text/javascript">
+
+$(document).ready(function()
+{
+  $.ajax({
+    url:"http://localhost:8080/cat",
+    datatype:"JSON",
+    type:"GET",
+    success:function(data)
+    {
+      for(var i=0;i<data.length;i++)
+      {
+        // var opt=new Option(data[i].cat_id+ " "+data[i].Title);
+var opt=new Option(data[i].cat_id);
+        $("#sel1").append(opt);
+      }
+    }
+  })
+});
+
+$(document).ready(function()
+{
+  $.ajax({
+    url:"http://localhost:8080/blogImg",
+    datatype:"JSON",
+    type:"GET",
+    success:function(data)
+    {
+      for(var i=0;i<data.length;i++)
+      {
+        // var opt=new Option(data[i].img_id+ " "+data[i].Title);
+        var opt=new Option(data[i].img_id);
+        $("#sel2").append(opt);
+      }
+    }
+  })
+});
+
+function postt(){
+    var url ="http://localhost:8080/";
+
+
+  var  titlee = document.getElementById('title1').value;
+  var texta = document.getElementById('comment').value;
+  var  opt1 = document.getElementById('sel1').value;
+  var  opt2 = document.getElementById('sel2').value;
+
+  var token=localStorage.getItem('token');
+  var id=localStorage.getItem('id');
+var myStr = token.replace(/"/g, '');
+  console.log(token);
+    $.ajax({
+      url: url+"blog",
+    headers: {'Content-Type': 'application/json','x-access-token':myStr},
+      type: "POST",/* or type:"GET" or type:"PUT" */
+      data: JSON.stringify({title:titlee,category_id:opt1,content:texta,User_id:id,image_id:opt2}),
+      success: function(response){
+        console.log(response);
+        document.getElementById('head1').innerHTML = response.title;
+        alert("Post is successfully added");
+  //     if(response.success=='true')
+  //     {
+  //       console.log('true');
+  //  localStorage.setItem("token", response.token);
+  //
+  // }
+      }
+
+  });
+  $('input[type="text"]').val('');
+  }
+
+
+
+
+
+
+function register(){
+    var url ="http://localhost:8080/";
+
+
+  var  user = document.getElementById('usrname').value;
+  var last = document.getElementById('last').value;
+  var  password = document.getElementById('psw').value;
+  var token=localStorage.getItem('token');
+
+var myStr = token.replace(/"/g, '');
+  console.log(token);
+    $.ajax({
+      url: url+"user",
+    headers: {'Content-Type': 'application/json','x-access-token':myStr},
+      type: "POST",/* or type:"GET" or type:"PUT" */
+      data: JSON.stringify({fname:user,lastname:last,password:password}),
+      success: function(response){
+        console.log(response);
+        alert("User is registered");
+  //     if(response.success=='true')
+  //     {
+  //       console.log('true');
+  //  localStorage.setItem("token", response.token);
+  //
+  // }
+      }
+
+  });
+  $('input[type="text"]').val('');
+  }
+  </script>
+
+
+
+
+<script type="text/javascript">
+function uploadimg()
+{
+  var name=document.getElementById('name1').value;
+  var file=document.getElementById('file1').value;
+var token=localStorage.getItem('token');
+console.log(token);
+var myStr = token.replace(/"/g, '');
+$.ajax(
+  {
+    url:"http://localhost:8080/blogImg",
+    headers: {'Content-Type': 'application/json','x-access-token':myStr},
+    type: "POST",/* or type:"GET" or type:"PUT" */
+    data: JSON.stringify({title:name,url:file}),
+    success: function(response){
+      console.log(response);
+
+      alert("Image is uploaded");
+
+    }
+
+  }
+);
+
+$('input[type="text"]').val('');
+$('input[type="file"]').val('');
+}
+</script>
+
+
+<script type="text/javascript">
+function dataa(){
+$.ajax(
+  {
+    url:"http://localhost:8080/blog/blogpost",
+    headers: {'Content-Type': 'application/json'},
+    type: "GET",/* or type:"GET" or type:"PUT" */
+    datatype:JSON,
+    success: function(response){
+      // var postt=JSON.parse(response.responseText);
+      for (var i = 0, len = response.length; i < len; ++i) {
+    document.getElementById('head1').innerHTML = response[i].title;
+      document.getElementById('head2').innerHTML = response[i].user.fname;
+      document.getElementById('para1').innerHTML= response[i].content;
+
+ }
+
+    }
+
+  }
+);
+}
+</script>
+
+
+
+<footer class="container-fluid">
+  <p>Footer Text</p>
+</footer>
+
+</body>
+</html>
