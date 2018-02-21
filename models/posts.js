@@ -17,7 +17,8 @@ module.exports = (sequelize, DataTypes) => {
       references: {
         model: "categories",
         key: "id"
-      } },
+      } 
+    },
     'userId':{
        type: DataTypes.INTEGER,
         references: {
@@ -68,15 +69,15 @@ module.exports = (sequelize, DataTypes) => {
         ],
         }).then(function(result){
 
-        callback(null,result);
+        callback(null, result);
 
       }).catch(function(error){
 
-        return callback(error,null);
+        return callback(error, null);
       });
     };
 
-    post.getPostImages = function(model_ref,id ,callback)
+    post.getPostImages = function(model_ref, id , callback)
     {
       post.belongsTo(model_ref.users, {foreignKey: 'userId'});
       post.belongsTo(model_ref.categories, {foreignKey: 'categoryId'});
@@ -101,11 +102,11 @@ module.exports = (sequelize, DataTypes) => {
           ],
           }).then(function(result){
 
-        callback(null,result);
+        callback(null, result);
 
       }).catch(function(error){
 
-        return callback(error,null);
+        return callback(error, null);
       });
     };
 
@@ -131,15 +132,15 @@ module.exports = (sequelize, DataTypes) => {
         ],
         }).then(function(result){
 
-        callback(null,result);
+        callback(null, result);
 
       }).catch(function(error){
 
-        return callback(error,null);
+        return callback(error, null);
       });
     };
 
-    post.deleteSingleImage = function(model_ref,id ,callback)
+    post.deleteSingleImage = function(model_ref, id, callback)
     {
       post.belongsTo(model_ref.users, {foreignKey: 'userId'});
       post.belongsTo(model_ref.categories, {foreignKey: 'categoryId'});
@@ -161,15 +162,15 @@ module.exports = (sequelize, DataTypes) => {
         ],
         }).then(function(result){
 
-        callback(null,result);
+        callback(null, result);
 
       }).catch(function(error){
 
-        return callback(error,null);
+        return callback(error, null);
       });
     };
 
-    post.enterPost=function(req,callback)
+    post.enterPost=function(req, callback)
     {
       post.create(
         {
@@ -180,11 +181,11 @@ module.exports = (sequelize, DataTypes) => {
           content:req.body.content,
         }).then(function(enter){
 
-          callback(null,enter);
+          callback(null, enter);
 
         })  .catch(function(error){
 
-          return callback(error,null);
+          return callback(error, null);
         });
       };
 

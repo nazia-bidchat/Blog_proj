@@ -1,12 +1,12 @@
 var models = require('../models');
 
-var post=function(){
+var post = function(){
 };
 
 post.getSinglePost = function(req,res)
 {
-  var id=req.params.id;
-  models.posts.getSinglePost(models,id,function(error,response)
+  var id = req.params.id;
+  models.posts.getSinglePost(models, id, function(error, response)
   {
     if(error)
     {
@@ -16,9 +16,9 @@ post.getSinglePost = function(req,res)
   });
 };
 
-post.getAllPosts = function(req,res)
+post.getAllPosts = function(req, res)
 {
-  models.posts.getAllPost(models,req,function(error,response)
+  models.posts.getAllPost(models, req, function(error, response)
   {
     if(error)
     {
@@ -28,10 +28,10 @@ post.getAllPosts = function(req,res)
   });
 };
 
-post.getPostImages = function(req,res)
+post.getPostImages = function(req, res)
 {
-  var id=req.params.id;
-  models.posts.getPostImages(models,id,function(error,response)
+  var id = req.params.id;
+  models.posts.getPostImages(models, id, function(error, response)
   {
     if(error)
     {
@@ -41,10 +41,10 @@ post.getPostImages = function(req,res)
   });
 };
 
-post.getSingleImage = function(req,res)
+post.getSingleImage = function(req, res)
 {
-  var id=req.params.id;
-  models.posts.getSingleImage(models,id,function(error,response)
+  var id = req.params.id;
+  models.posts.getSingleImage(models, id, function(error, response)
   {
     if(error)
     {
@@ -56,8 +56,8 @@ post.getSingleImage = function(req,res)
 
 post.deleteSingleImage = function(req,res)
 {
-  var id=req.params.id;
-  models.posts.deleteSingleImage(models,id,function(error,response)
+  var id = req.params.id;
+  models.posts.deleteSingleImage(models, id, function(error, response)
   {
     if(error)
     {
@@ -67,16 +67,16 @@ post.deleteSingleImage = function(req,res)
   });
 };
 
-post.enterPost=function(req,res)
+post.enterPost = function(req, res)
 {
-  models.posts.enterPost(req,function(err,response)
+  models.posts.enterPost(req,function(err, response)
   {
     if(err)
     {
-      return res.status(400).send(error);
+      return res.status(400).send(err);
     }
     return res.status(201).send(response);
   });
 };
 
-module.exports=post;
+module.exports = post;

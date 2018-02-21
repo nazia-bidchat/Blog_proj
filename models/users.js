@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
       },
     );
 
-    users.getUserName = function(req ,callback)
+    users.getUserName = function(req, callback)
     {
       users.findOne(
       {
@@ -61,15 +61,15 @@ module.exports = (sequelize, DataTypes) => {
 
       }).then(function(result){
 
-        callback(null,result);
+        callback(null, result);
 
       }).catch(function(error){
 
-        return callback(error,null);
+        return callback(error, null);
       });
     };
 
-    users.enterUser = function(req,callback)
+    users.enterUser = function(req, callback)
     {
       users.create(
         {
@@ -80,11 +80,11 @@ module.exports = (sequelize, DataTypes) => {
 
         }).then(function(enter)
         {
-          callback(null,enter);
+          callback(null, enter);
 
         }).catch(function(error){
 
-          return callback(error,null);
+          return callback(error, null);
         });
     };
 
@@ -108,7 +108,7 @@ module.exports = (sequelize, DataTypes) => {
 
       }).catch(function (error) {
 
-        return callback(error,null);
+        return callback(error, null);
       });
 
     };
@@ -136,7 +136,7 @@ module.exports = (sequelize, DataTypes) => {
         var token = jwt.sign({ id: user.id }, config.secret, {
           expiresIn: 86400 // expires in 24 hours
         });
-        
+
         users.update(
           {
             Token: token

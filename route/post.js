@@ -1,7 +1,7 @@
 var express 		= require('express');
 var router			= express.Router();
-var postController = require('../controllers/postController');
-var authenticate = require('../library/authenticate');
+var postController  = require('../controllers/postController');
+var authenticate    = require('../library/authenticate');
 
 router.get('/?',postController.getAllPosts);
 router.get('/:id',postController.getSinglePost);

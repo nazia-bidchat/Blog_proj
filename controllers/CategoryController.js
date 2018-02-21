@@ -1,11 +1,11 @@
 var models = require('../models');
 
-var categories=function(){
+var categories = function(){
 };
 
-categories.getAllCategories=function(req,res)
+categories.getAllCategories = function(req, res)
 {
-  models.categories.getAllCategories (function(err,response)
+  models.categories.getAllCategories (function(err, response)
   {
     if(err)
     {
@@ -15,9 +15,9 @@ categories.getAllCategories=function(req,res)
   });
 };
 
-categories.enterCategory=function(req,res)
+categories.enterCategory = function(req, res)
 {
-  models.categories.enterCategory(req,function(err,response)
+  models.categories.enterCategory(req, function(err, response)
   {
     if(err)
     {
@@ -27,4 +27,4 @@ categories.enterCategory=function(req,res)
   });
 };
 
-module.exports=categories;
+module.exports = categories;

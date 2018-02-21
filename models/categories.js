@@ -22,7 +22,7 @@ module.exports = function (sequelize, DataTypes){
   },
   );
 
-  categories.getAllCategories=function(callback)
+  categories.getAllCategories = function(callback)
   {
     categories.findAll(
       {
@@ -39,7 +39,7 @@ module.exports = function (sequelize, DataTypes){
     });
   };
 
-  categories.enterCategory=function(req,callback)
+  categories.enterCategory = function(req, callback)
   {
     categories.create(
       {

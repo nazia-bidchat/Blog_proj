@@ -1,12 +1,12 @@
 var models = require('../models');
 
-var users=function(){
+var users = function(){
 };
 
-users.getUserName = function(req,res)
+users.getUserName = function(req, res)
 {
-  var id=req.params.id;
-  models.users.getUserName(req,function(error,response)
+  var id = req.params.id;
+  models.users.getUserName(req, function(error, response)
   {
     if(error)
     {
@@ -16,9 +16,9 @@ users.getUserName = function(req,res)
   });
 };
 
-users.getAllUsers=function(req,res)
+users.getAllUsers = function(req,res)
 {  
-  models.users.getAllUsers (function(err,response)
+  models.users.getAllUsers(function(err,response)
   {
     if(err)
     {
@@ -28,9 +28,9 @@ users.getAllUsers=function(req,res)
   });
 };
 
-users.enterUser=function(req,res)
+users.enterUser = function(req,res)
 {
-  models.users.enterUser(req,function(err,response)
+  models.users.enterUser(req, function(err, response)
   {
     if(err)
     {
@@ -39,9 +39,9 @@ users.enterUser=function(req,res)
     return res.status(200).send(response);
   });
 };
-users.updateUser=function(req,res)
+users.updateUser = function(req,res)
 {
-  models.users.updateUser(req,function(err,response)
+  models.users.updateUser(req, function(err, response)
   {
     if(err)
     {
@@ -51,9 +51,9 @@ users.updateUser=function(req,res)
   });
 };
 
-users.login=function(req,res)
+users.login = function(req, res)
 {
-  models.users.login(req,res);
+  models.users.login(req, res);
 }
 
 module.exports=users;
