@@ -1,7 +1,6 @@
 var models = require('../models');
 
 var post=function(){
-
 };
 
 post.getSinglePost = function(req,res)
@@ -9,7 +8,6 @@ post.getSinglePost = function(req,res)
   var id=req.params.id;
   models.posts.getSinglePost(models,id,function(error,response)
   {
-
     if(error)
     {
       return res.status(400).send(error);
@@ -18,13 +16,10 @@ post.getSinglePost = function(req,res)
   });
 };
 
-
 post.getAllPosts = function(req,res)
 {
-
   models.posts.getAllPost(models,req,function(error,response)
   {
-
     if(error)
     {
       return res.status(400).send(error);
@@ -35,7 +30,6 @@ post.getAllPosts = function(req,res)
 
 post.getPostImages = function(req,res)
 {
-
   var id=req.params.id;
   models.posts.getPostImages(models,id,function(error,response)
   {
@@ -49,7 +43,6 @@ post.getPostImages = function(req,res)
 
 post.getSingleImage = function(req,res)
 {
-
   var id=req.params.id;
   models.posts.getSingleImage(models,id,function(error,response)
   {
@@ -85,4 +78,5 @@ post.enterPost=function(req,res)
     return res.status(201).send(response);
   });
 };
+
 module.exports=post;

@@ -1,7 +1,8 @@
 var models = require('../models');
-var categories=function(){
 
+var categories=function(){
 };
+
 categories.getAllCategories=function(req,res)
 {
   models.categories.getAllCategories (function(err,response)
@@ -14,7 +15,6 @@ categories.getAllCategories=function(req,res)
   });
 };
 
-
 categories.enterCategory=function(req,res)
 {
   models.categories.enterCategory(req,function(err,response)
@@ -22,7 +22,6 @@ categories.enterCategory=function(req,res)
     if(err)
     {
       return res.status(400).send(err);
-
     }
     return res.status(200).send(response);
   });

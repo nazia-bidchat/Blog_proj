@@ -17,12 +17,12 @@ users.getUserName = function(req,res)
 };
 
 users.getAllUsers=function(req,res)
-{  models.users.getAllUsers (function(err,response)
+{  
+  models.users.getAllUsers (function(err,response)
   {
     if(err)
     {
       return res.status(400).send(err);
-
     }
     return res.status(200).send(response);
   });
@@ -35,7 +35,6 @@ users.enterUser=function(req,res)
     if(err)
     {
       return res.status(400).send(err);
-
     }
     return res.status(200).send(response);
   });
@@ -45,7 +44,9 @@ users.updateUser=function(req,res)
   models.users.updateUser(req,function(err,response)
   {
     if(err)
-    {return res.status(400).send(err);}
+    {
+      return res.status(400).send(err);
+    }
     return res.status(200).send(response);
   });
 };
@@ -53,8 +54,6 @@ users.updateUser=function(req,res)
 users.login=function(req,res)
 {
   models.users.login(req,res);
-
 }
-
 
 module.exports=users;

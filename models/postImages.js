@@ -1,6 +1,9 @@
 var models = require('../models');
+
 module.exports = (sequelize, DataTypes) => {
+
   var postImages = sequelize.define('postImages', {
+
     'id': {
       type: DataTypes.INTEGER,
       autoIncrement: true,
@@ -12,8 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     'title':{
       type: DataTypes.STRING,
     },
-    'postId':
-    {
+    'postId':{
       type: DataTypes.INTEGER,
       references: {
         model: "posts",
@@ -24,7 +26,8 @@ module.exports = (sequelize, DataTypes) => {
   {
     freezeTableName: true,
     timestamps: true,
-  },);
+  },
+);
 
-  return postImages;
+ return postImages;
 };
