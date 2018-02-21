@@ -2,8 +2,8 @@ var models = require('../models');
 
 
 module.exports = (sequelize, DataTypes) => {
-  var blog = sequelize.define('blogs', {
-    'blog_id': {
+  var post = sequelize.define('posts', {
+    'id': {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true
@@ -11,20 +11,20 @@ module.exports = (sequelize, DataTypes) => {
     'title': {
       type: DataTypes.STRING
     },
-    category_id:{
+    'categoryId':{
       type: DataTypes.INTEGER,
       references: {
-        model: "category",
-        key: "cat_id"
+        model: "categories",
+        key: "id"
       } },
-      'User_id':{
+      'userId':{
         type: DataTypes.INTEGER,
         references: {
-          model: "user",
+          model: "users",
           key: "id"
         }
       },
-      content:{
+      'content':{
         type: DataTypes.STRING },
       },
 
@@ -35,26 +35,26 @@ module.exports = (sequelize, DataTypes) => {
   );
 
 
-    blog.getSinglepost = function(model_ref,id ,callback)
+    post.getSinglePost = function(model_ref,id ,callback)
     {
-      blog.belongsTo(model_ref.user, {foreignKey: 'User_id'});
-      blog.belongsTo(model_ref.category, {foreignKey: 'category_id'});
-      blog.hasMany(model_ref.blogimages, {foreignKey: 'postId'});
-      blog.findOne({
-        attributes:['title','blog_id','content'],
+      post.belongsTo(model_ref.users, {foreignKey: 'userId'});
+      post.belongsTo(model_ref.categories, {foreignKey: 'categoryId'});
+      post.hasMany(model_ref.postImages, {foreignKey: 'postId'});
+      post.findOne({
+        attributes:['title','id','content'],
         include: [
           {
-            model: model_ref.user,
+            model: model_ref.users,
             required : true,
             attributes:['fname','lastname']
           },
           {
-            model: model_ref.category,
+            model: model_ref.categories,
             required : true,
             attributes:['Title']
           },
           {
-            model: model_ref.blogimages,
+            model: model_ref.postImages,
             required : true,
             attributes:['title','url'],
 
@@ -66,24 +66,21 @@ module.exports = (sequelize, DataTypes) => {
         } ).then(function(result){
         callback(null,result);
       }).catch(function(error){
-        console.log("error",error);
-        return callback({
-          message:error.message
-        });
+        return callback(error,null);
       });
     };
 
-    blog.getPostimages = function(model_ref,id ,callback)
+    post.getPostImages = function(model_ref,id ,callback)
     {
-      blog.belongsTo(model_ref.user, {foreignKey: 'User_id'});
-      blog.belongsTo(model_ref.category, {foreignKey: 'category_id'});
-      blog.hasMany(model_ref.blogimages, {foreignKey: 'postId'});
-      blog.findAll({
-        attributes:['title','blog_id','content'],
+      post.belongsTo(model_ref.users, {foreignKey: 'userId'});
+      post.belongsTo(model_ref.categories, {foreignKey: 'categoryId'});
+      post.hasMany(model_ref.postImages, {foreignKey: 'postId'});
+      post.findAll({
+        attributes:['title','id','content'],
         include: [
 
           {
-            model: model_ref.blogimages,
+            model: model_ref.postImages,
             required : true,
             attributes:['title','url'],
 
@@ -95,22 +92,19 @@ module.exports = (sequelize, DataTypes) => {
           } ).then(function(result){
         callback(null,result);
       }).catch(function(error){
-
-        return callback({
-          message:error.message
-        });
+        return callback(error,null);
       });
     };
 
-    blog.getSingleimage = function(model_ref,id ,callback)
+    post.getSingleImage = function(model_ref,id ,callback)
     {
-      blog.belongsTo(model_ref.user, {foreignKey: 'User_id'});
-      blog.belongsTo(model_ref.category, {foreignKey: 'category_id'});
-      blog.hasMany(model_ref.blogimages, {foreignKey: 'postId'});
-      blog.findOne({
+      post.belongsTo(model_ref.users, {foreignKey: 'userId'});
+      post.belongsTo(model_ref.categories, {foreignKey: 'categoryId'});
+      post.hasMany(model_ref.postImages, {foreignKey: 'postId'});
+      post.findOne({
         include: [
           {
-            model: model_ref.blogimages,
+            model: model_ref.postImages,
             required : true,
             attributes:['title','url'],
 
@@ -122,22 +116,19 @@ module.exports = (sequelize, DataTypes) => {
           } ).then(function(result){
         callback(null,result);
       }).catch(function(error){
-
-        return callback({
-          message:error.message
-        });
+        return callback(error,null);
       });
     };
 
-    blog.deleteSingleimage = function(model_ref,id ,callback){
+    post.deleteSingleImage = function(model_ref,id ,callback){
 
-      blog.belongsTo(model_ref.user, {foreignKey: 'User_id'});
-      blog.belongsTo(model_ref.category, {foreignKey: 'category_id'});
-      blog.hasMany(model_ref.blogimages, {foreignKey: 'postId'});
-      blog.destroy({
+      post.belongsTo(model_ref.users, {foreignKey: 'userId'});
+      post.belongsTo(model_ref.categories, {foreignKey: 'categoryId'});
+      post.hasMany(model_ref.postImages, {foreignKey: 'postId'});
+      post.destroy({
         include: [
           {
-            model: model_ref.blogimages,
+            model: model_ref.postImages,
             required : true,
             attributes:['title','url'],
 
@@ -150,58 +141,52 @@ module.exports = (sequelize, DataTypes) => {
       } ).then(function(result){
         callback(null,result);
       }).catch(function(error){
-
-        return callback({
-          message:error.message
-        });
+        return callback(error,null);
       });
     };
 
-    blog.enterPost=function(req,callback)
+    post.enterPost=function(req,callback)
     {
-      blog.create(
+      post.create(
         {
           id:req.body.id,
           title:req.body.title,
-          category_id:req.body.category_id,
-          User_id:req.body.User_id,
+          categoryId:req.body.categoryId,
+          userId:req.body.userId,
           content:req.body.content,
         }).then(function(enter)
         {
           callback(null,enter);
         })  .catch(function(error){
-
-          return callback({
-            message:error.message
-          });
+          return callback(error,null);
         });
       };
 
-      blog.getAllblog=function(model_ref,req,callback)
+      post.getAllPosts=function(model_ref,req,callback)
       {
 
-        blog.belongsTo(model_ref.user, {foreignKey: 'User_id'});
-        blog.belongsTo(model_ref.category, {foreignKey: 'category_id'});
-        blog.hasMany(model_ref.blogimages, {foreignKey: 'postId'});
+        post.belongsTo(model_ref.user, {foreignKey: 'userId'});
+        post.belongsTo(model_ref.category, {foreignKey: 'categoryId'});
+        post.hasMany(model_ref.postImages, {foreignKey: 'postId'});
         var limit =parseInt( req.query.limit);
         var offset=parseInt( req.query.offset);
-        blog.findAll(
+        post.findAll(
           {
             attributes:['title','content'],
 
             include: [
               {
-                model: model_ref.user,
+                model: model_ref.users,
                 required : true,
                 attributes:['fname','lastname']
               },
               {
-                model: model_ref.category,
+                model: model_ref.categories,
                 required : true,
                 attributes:['Title']
               },
               {
-                model: model_ref.blogimages,
+                model: model_ref.postImages,
                 required : false,
                 attributes:['title','url'],
               } ],
@@ -211,11 +196,8 @@ module.exports = (sequelize, DataTypes) => {
               callback(null,result);
             })
             .catch(function(error){
-
-              return callback({
-                message:error.message
-              });
+              return callback(error,null);
             });
           };
-          return blog;
+          return post;
         };

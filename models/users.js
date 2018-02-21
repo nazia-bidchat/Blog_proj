@@ -2,10 +2,9 @@
 var bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
 var config = require('../config/config1');
-var verifyToken = require('../controllers/verifyToken');
 
 module.exports = (sequelize, DataTypes) => {
-  var users = sequelize.define('user', {
+  var users = sequelize.define('users', {
     'id': {
       type: DataTypes.INTEGER,
       autoIncrement: true,
@@ -23,14 +22,14 @@ module.exports = (sequelize, DataTypes) => {
         }
       }, {
         freezeTableName: true,
-        timestamps: false,
+        timestamps: true,
       },
 
 
     );
 
 
-    users.getUsername = function(req ,callback){
+    users.getUserName = function(req ,callback){
 
       users.findOne({
         attributes:['fname'],
@@ -52,7 +51,7 @@ module.exports = (sequelize, DataTypes) => {
     };
 
 
-    users.getAlluser=function(callback)
+    users.getAllUsers=function(callback)
     {
       users.findAll({
         attributes:['lastname'],
@@ -149,7 +148,7 @@ module.exports = (sequelize, DataTypes) => {
                 return   res.status(200).send({ success: true, token: token, id: user.id });
               }).catch(function(error){
 
-                return res.status(500).send("unable to update into database");
+                return res.status(400).send("unable to update into database");
 
               });
             }

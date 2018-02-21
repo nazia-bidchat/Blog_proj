@@ -2,8 +2,8 @@ var models = require('../models');
 
 
 module.exports = function (sequelize, DataTypes) {
-  var categories = sequelize.define('category', {
-    'cat_id': {
+  var categories = sequelize.define('categories', {
+    'id': {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true
@@ -18,15 +18,15 @@ module.exports = function (sequelize, DataTypes) {
   },
     {
              freezeTableName: true,
-             timestamps: true,
+             timestamps: false,
          },
 
 );
 
-categories.getAllcategory=function(callback)
+categories.getAllCategories=function(callback)
 {
   categories.findAll({
-    attributes:['cat_id','Title'],
+    attributes:['id','Title'],
   }).then(function(result){
     callback(null,result);
   })
@@ -37,13 +37,13 @@ categories.getAllcategory=function(callback)
     });
   });
 };
-categories.enterCat=function(req,callback)
+categories.enterCategory=function(req,callback)
 {
   categories.create(
     {
       Title:req.body.Title,
       Description:req.body.Description,
-      cat_id:req.body.id,
+     id:req.body.id,
     }).then(function(enter)
     {
       callback(null,enter);

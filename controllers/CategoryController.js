@@ -2,26 +2,26 @@ var models = require('../models');
 var categories=function(){
 
 };
-categories.getAllcategory=function(req,res)
+categories.getAllCategories=function(req,res)
 {
-  models.category.getAllcategory (function(err,response)
+  models.categories.getAllCategories (function(err,response)
   {
     if(err)
     {
-      return res.status(404).send(response);
+      return res.status(400).send(err);
     }
     return res.status(200).send(response);
   });
 };
 
 
-categories.enterCat=function(req,res)
+categories.enterCategory=function(req,res)
 {
-  models.category.enterCat(req,function(err,response)
+  models.categories.enterCategory(req,function(err,response)
   {
     if(err)
     {
-      return res.status(500).send(response);
+      return res.status(400).send(err);
 
     }
     return res.status(200).send(response);

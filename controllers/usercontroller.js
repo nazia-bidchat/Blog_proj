@@ -1,26 +1,27 @@
 var models = require('../models');
-var VerifyToken = require('../controllers/VerifyToken');
+
 var users=function(){
 };
 
-users.getUsername = function(req,res)
-{var id=req.params.id;
-  models.user.getUsername(req,function(error,response)
+users.getUserName = function(req,res)
+{
+  var id=req.params.id;
+  models.users.getUserName(req,function(error,response)
   {
     if(error)
     {
-      return res.status(404).send(response);
+      return res.status(400).send(error);
     }
     return res.status(200).send(response);
   });
 };
 
-users.getAlluser=function(req,res)
-{  models.user.getAlluser (function(err,response)
+users.getAllUsers=function(req,res)
+{  models.users.getAllUsers (function(err,response)
   {
     if(err)
     {
-      return res.status(404).send(response);
+      return res.status(400).send(err);
 
     }
     return res.status(200).send(response);
@@ -29,11 +30,11 @@ users.getAlluser=function(req,res)
 
 users.enterUser=function(req,res)
 {
-  models.user.enterUser(req,function(err,response)
+  models.users.enterUser(req,function(err,response)
   {
     if(err)
     {
-      return res.status(500).send(response);
+      return res.status(400).send(err);
 
     }
     return res.status(200).send(response);
@@ -41,18 +42,17 @@ users.enterUser=function(req,res)
 };
 users.updateUser=function(req,res)
 {
-  models.user.updateUser(req,function(err,response)
+  models.users.updateUser(req,function(err,response)
   {
     if(err)
-    {return res.status(500).send(response);}
+    {return res.status(400).send(err);}
     return res.status(200).send(response);
   });
 };
 
 users.login=function(req,res)
 {
-  console.log(req.query);
-  models.user.login(req,res);
+  models.users.login(req,res);
 
 }
 
