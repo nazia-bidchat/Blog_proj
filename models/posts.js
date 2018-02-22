@@ -35,17 +35,29 @@ module.exports = (sequelize, DataTypes) => {
       },
      );
 
-    post.getSinglePost = function(model_ref, id, callback)
+    post.getSinglePost = function(model_ref, req, callback)
     {
       post.belongsTo(model_ref.users, {foreignKey: 'userId'});
       post.belongsTo(model_ref.categories, {foreignKey: 'categoryId'});
       post.hasMany(model_ref.postImages, {foreignKey: 'postId'});
-      
-      post.findOne(
+      var limit;
+      var offset;
+      var id = req.params.id;
+      if(id)
+      {
+        limit =1;
+        offset=0;
+      }
+      else
+      {
+      limit = parseInt(req.query.limit);
+      offset = parseInt(req.query.offset);
+      }
+      post.findAll(
         {
-         attributes:['title','id','content'],
-
-         include: [
+        attributes:['title','id','content'],
+        where: (id)? {id:parseInt(id)}:{},
+        include: [
           {
             model: model_ref.users,
             required : true,
@@ -58,18 +70,18 @@ module.exports = (sequelize, DataTypes) => {
           },
           {
             model: model_ref.postImages,
-            required : true,
+            required : false,
             attributes:['title','url'],
-
-            where:
-            {
-              postId:parseInt(id),
-            }  
-          }
+            where: (id)? {postId:parseInt(id)}:{}   
+          
+          },
         ],
+        
+        limit:limit,
+        offset:offset
         }).then(function(result){
 
-        callback(null, result);
+        callback(null,result);
 
       }).catch(function(error){
 
@@ -85,7 +97,7 @@ module.exports = (sequelize, DataTypes) => {
      
       post.findAll(
         {
-         attributes:['title','id','content'],
+        attributes:['title','id','content'],
 
         include: [
           {
@@ -170,7 +182,7 @@ module.exports = (sequelize, DataTypes) => {
       });
     };
 
-    post.enterPost=function(req, callback)
+    post.enterPost = function(req, callback)
     {
       post.create(
         {
@@ -188,49 +200,6 @@ module.exports = (sequelize, DataTypes) => {
           return callback(error, null);
         });
       };
-
-    post.getAllPosts = function (model_ref, req, callback)
-    {
-      post.belongsTo(model_ref.user, { foreignKey: 'userId' });
-      post.belongsTo(model_ref.category, { foreignKey: 'categoryId' });
-      post.hasMany(model_ref.postImages, { foreignKey: 'postId' });
-
-      var limit = parseInt(req.query.limit);
-      var offset = parseInt(req.query.offset);
-
-      post.findAll(
-        {
-          attributes: ['title', 'content'],
-
-          include: [
-            {
-              model: model_ref.users,
-              required: true,
-              attributes: ['fname', 'lastname']
-            },
-            {
-              model: model_ref.categories,
-              required: true,
-              attributes: ['Title']
-            },
-            {
-              model: model_ref.postImages,
-              required: false,
-              attributes: ['title', 'url'],
-            }
-          ],
-          limit: limit,
-          offset: offset
-        }).then(function (result) {
-
-          callback(null, result);
-
-        })
-        .catch(function (error) {
-
-          return callback(error, null);
-        });
-    };
           
    return post;
 };

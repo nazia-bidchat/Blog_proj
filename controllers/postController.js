@@ -6,7 +6,7 @@ var post = function(){
 post.getSinglePost = function(req,res)
 {
   var id = req.params.id;
-  models.posts.getSinglePost(models, id, function(error, response)
+  models.posts.getSinglePost(models, req, function(error, response)
   {
     if(error)
     {
@@ -18,7 +18,7 @@ post.getSinglePost = function(req,res)
 
 post.getAllPosts = function(req, res)
 {
-  models.posts.getAllPost(models, req, function(error, response)
+  models.posts.getAllPosts(models, req, function(error, response)
   {
     if(error)
     {

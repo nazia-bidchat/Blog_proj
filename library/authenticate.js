@@ -18,7 +18,7 @@ function authenticate(req, res, next)
     
       req.userId = decoded.id;
   
-    models.user.findById(req.userId, { password: 0 }).then( function (user) {
+    models.users.findById(req.userId, { password: 0 }).then( function (user) {
       next();
    }).catch(function(error)
    {

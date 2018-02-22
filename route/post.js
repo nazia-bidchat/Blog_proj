@@ -3,7 +3,7 @@ var router			= express.Router();
 var postController  = require('../controllers/postController');
 var authenticate    = require('../library/authenticate');
 
-router.get('/?',postController.getAllPosts);
+router.get('/?',postController.getSinglePost);
 router.get('/:id',postController.getSinglePost);
 router.get('/:id/images',postController.getPostImages);
 router.post('/',authenticate,postController.enterPost);

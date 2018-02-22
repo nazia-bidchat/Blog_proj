@@ -2,7 +2,7 @@ var models = require('../models');
 
 module.exports = (sequelize, DataTypes) => {
 
-  var postImages = sequelize.define('postImages', {
+  var postImages = sequelize.define('post_images', {
 
     'id': {
       type: DataTypes.INTEGER,

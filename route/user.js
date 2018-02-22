@@ -4,7 +4,7 @@ var authenticate    = require('../library/authenticate');
 var userController  = require('../controllers/userController');
 
 router.get('/user/:id', userController.getUserName);
-router.get('/user',userController.getAllUsers);
+router.get('/user',userController.getUserName);
 router.post('/user',userController.enterUser);
 router.put('/user/:id',authenticate,userController.updateUser);
 router.post('/login',userController.login);

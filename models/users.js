@@ -33,15 +33,14 @@ module.exports = (sequelize, DataTypes) => {
 
     users.getUserName = function(req, callback)
     {
-      users.findOne(
+      var id=req.params.id;
+
+      users.findAll(
       {
-        attributes:['fname'],
-      },
-      {
-        where:
-        {
-          id:req.params['id'],
-        }
+        attributes:['fname','lastname'],
+
+        where: (id)? {id:parseInt(id)}:{},
+        
       }).then(function(result){
 
         callback(null,result);
@@ -50,22 +49,6 @@ module.exports = (sequelize, DataTypes) => {
       .catch(function(error){
 
         return callback(error,null);
-      });
-    };
-
-    users.getAllUsers = function(callback)
-    {
-      users.findAll({
-
-        attributes:['lastname'],
-
-      }).then(function(result){
-
-        callback(null, result);
-
-      }).catch(function(error){
-
-        return callback(error, null);
       });
     };
 
@@ -113,7 +96,6 @@ module.exports = (sequelize, DataTypes) => {
 
     };
 
-
     users.login = function (req, res) 
     {
       users.findOne(
@@ -136,7 +118,6 @@ module.exports = (sequelize, DataTypes) => {
         var token = jwt.sign({ id: user.id }, config.secret, {
           expiresIn: 86400 // expires in 24 hours
         });
-
         users.update(
           {
             Token: token
