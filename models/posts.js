@@ -43,9 +43,9 @@ module.exports = (sequelize, DataTypes) => {
       
       post.findOne(
         {
-        attributes:['title','id','content'],
+         attributes:['title','id','content'],
 
-        include: [
+         include: [
           {
             model: model_ref.users,
             required : true,
@@ -85,7 +85,7 @@ module.exports = (sequelize, DataTypes) => {
      
       post.findAll(
         {
-        attributes:['title','id','content'],
+         attributes:['title','id','content'],
 
         include: [
           {

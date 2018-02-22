@@ -25,17 +25,16 @@ module.exports = function (sequelize, DataTypes){
   categories.getAllCategories = function(callback)
   {
     categories.findAll(
-      {
-        attributes:['id','Title'],
+    {
+      attributes:['id','Title'],
 
     }).then(function(result){
 
-      callback(null,result);
+      callback(null, result);
 
-    })
-    .catch(function(error){
+    }).catch(function(error){
 
-      return callback(error,null);
+      return callback(error, null);
     });
   };
 
@@ -45,14 +44,14 @@ module.exports = function (sequelize, DataTypes){
       {
         Title:req.body.Title,
         Description:req.body.Description,
-      id:req.body.id,
-      }).then(function(enter)
-      {
-        callback(null,enter);
+        id:req.body.id,
+      }).then(function(enter){
+
+        callback(null, enter);
 
       }).catch(function(error){
 
-        return callback(error,null);
+        return callback(error, null);
       });
     };
 
