@@ -1,52 +1,59 @@
 var models = require('../models');
 
-var Users=function(){
-
+var users = function(){
 };
 
-Users.getName = function(req,res)
+users.getUserName = function(req, res)
 {
-  console.log('In getname 1'+req.params.id);
-var id=req.params.id;//return res.status(200).send("success");
- models.user.getName(id,function(error,response)
-{
-  console.log('In getname 2'+req.params.id);
-  if(error)
+  var id = req.params.id;
+  models.users.getUserName(req, function(error, response)
   {
-    return res.status(409).send(response);
-  }
-  return res.status(200).send(response);
-});
-};
-
-Users.getAll=function(req,res)
-{
-    console.log('In getname 3');
-  models.user.getAll (function(err,response)
-  {  console.log('In getname 4');
-    if(err)
+    if(error)
     {
-      return res.status(409).send(response);
-
+      return res.status(400).send(error);
     }
     return res.status(200).send(response);
   });
 };
 
-Users.enterUser=function(req,res)
-{
-  console.log('In getname 5');
-  console.log(req.body.query);
-  models.user.enterUser(req,function(err,response)
-  {  console.log('In getname 6');
-  if(err)
+users.getAllUsers = function(req,res)
+{  
+  models.users.getAllUsers(function(err,response)
   {
-    return res.status(409).send(response);
-
-  }
-  return res.status(200).send(response);
-});
+    if(err)
+    {
+      return res.status(400).send(err);
+    }
+    return res.status(200).send(response);
+  });
 };
 
+users.enterUser = function(req,res)
+{
+  models.users.enterUser(req, function(err, response)
+  {
+    if(err)
+    {
+      return res.status(400).send(err);
+    }
+    return res.status(200).send(response);
+  });
+};
+users.updateUser = function(req,res)
+{
+  models.users.updateUser(req, function(err, response)
+  {
+    if(err)
+    {
+      return res.status(400).send(err);
+    }
+    return res.status(200).send(response);
+  });
+};
 
-module.exports=Users;
+users.login = function(req, res)
+{
+  models.users.login(req, res);
+}
+
+module.exports=users;

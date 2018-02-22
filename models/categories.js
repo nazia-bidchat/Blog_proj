@@ -1,95 +1,59 @@
 var models = require('../models');
 
+module.exports = function (sequelize, DataTypes){
 
-module.exports = function (sequelize, DataTypes) {
-    var categoryy = sequelize.define('categoryyy', {
-        'cat_id': {
-            type: DataTypes.INTEGER,
-            autoIncrement: true,
-            primaryKey: true
-        },
-        'Title': {
-            type: DataTypes.INTEGER
-        },
-        'Description': {
-            type: DataTypes.STRING
-        },
-        'User_id':
-        {  type: DataTypes.INTEGER,
-          references: {
-     model: "user",
-     key: "id"
-   }
-        }
-      },
-        // {
-        //          freezeTableName: true,
-        //          timestamps: false
-        //      }
-           );
+  var categories = sequelize.define('categories', {
 
+    'id': {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true
+    },
+    'Title': {
+      type: DataTypes.STRING
+    },
+    'Description': {
+      type: DataTypes.STRING
+    },
+  },
+  {
+       freezeTableName: true,
+       timestamps: false,
+  },
+  );
 
-             categoryy.getCat = function(model_ref,details ,callback){
-               //callback(null,true);
-              categoryy.belongsTo(model_ref.user, {foreignKey: 'User_id'});
+  categories.getAllCategories = function(callback)
+  {
+    categories.findAll(
+    {
+      attributes:['id','Title'],
 
-             categoryy.findAll({
-                   attributes:['Title'],
+    }).then(function(result){
 
-                                      include:[
-                                        {
-                                          model:model_ref.user,
-                                          required:true,
-                                          attributes:['fname','lastname']
-                                        }
-                                      ]
+      callback(null, result);
 
-                 }).then(function(result){
-                   callback(null,result);
-               })
-               .catch(function(error){
-                 console.log("error",error);
-                 return callback({
-                     message:error.message
-                   });
-               });
-             };
+    }).catch(function(error){
 
+      return callback(error, null);
+    });
+  };
 
-             categoryy.getAllCat=function(callback)
-             {
-             categoryy.findAll({
-                     attributes:['Description'],
-                   }).then(function(result){
-                     callback(null,result);
-                 })
-                 .catch(function(error){
-                   console.log("error",error);
-                   return callback({
-                       message:error.message
-                     });
-                 });
-             };
-             categoryy.enterCat=function(req,callback)
-             {
-               categoryy.create(
-                 {
-                   Title:req.body.Title,
-                   Description:req.body.Description,
-                   cat_id:req.body.id,
-                   User_id:req.body.u_id,
-                 }).then(function(enter)
-                 {
-                 callback(null,enter);
-               })  .catch(function(error){
-                   console.log("error",error);
-                   return callback({
-                       message:error.message
-                     });
-                   });
+  categories.enterCategory = function(req, callback)
+  {
+    categories.create(
+      {
+        Title:req.body.Title,
+        Description:req.body.Description,
+        id:req.body.id,
+      }).then(function(enter){
 
-             };
+        callback(null, enter);
 
-console.log("im in category table");
-return categoryy;
+      }).catch(function(error){
+
+        return callback(error, null);
+      });
+    };
+
+  return categories;
 };

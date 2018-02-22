@@ -1,16 +1,9 @@
-var express 		= require('express');
-var router1 			= express.Router();
+var express 		   = require('express');
+var router			   = express.Router();
+var authenticate       = require('../library/authenticate');
+var categoryController = require('../controllers/categoryController');
 
-var CategoryController = require('../controllers/CatController');
-//console.log('hi' + JSON.stringify(UserController.getname));
-router1.get('/cat/:id', CategoryController.getCat);
-router1.get('/',CategoryController.getAllCat);
+router.get('/',categoryController.getAllCategories);
+router.post('/',authenticate,categoryController.enterCategory);
 
-router1.post('/',CategoryController.enterCat);
-// router.get('/user', function(req,res)
-// {
-//   console.log('connected');
-//   res.send('hi hello');
-// });
-
-module.exports = router1;
+module.exports = router;
